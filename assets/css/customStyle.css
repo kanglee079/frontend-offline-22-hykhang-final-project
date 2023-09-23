@@ -1,0 +1,12 @@
+.echo-story-text h4 a {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2; 
+}
+
+.echo-de-category-content-title{
+    overflow: hidden;
+    -webkit-line-clamp: 6; 
+}
+
