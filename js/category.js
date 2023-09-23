@@ -4,21 +4,27 @@ const id = parseInt(urlParams.get("id"));
 let currentPage = parseInt(urlParams.get("page"));
 if (isNaN(currentPage)) currentPage = 1;
 
-console.log(id);
-
 const elArticlesWithCategory =document.getElementById("articlesWithCategory");
+const elCategoryName = document.getElementById("categoryName");
 
-API.get("categories_news/1/articles?limit=10&page=2").then((res) => {
+API.get(`categories_news/${id}/articles?limit=10&page=2`).then((res) => {
     const articlesByCategory = res.data.data;
 
-    html = "";
+    let html = "";
+    let htmlCategory ="";
     articlesByCategory.forEach(item => {
         const title = item.title;
         const thumb = item.thumb;
         const description = item.description;
         const publish_date = dayjs(item.publish_date).fromNow();
-
-
+        htmlCategory =/*html */ `
+            <div class="meta">
+            <a href="#" class="prev">ECHO /</a>
+            <a href="#" class="next">Danh Mục</a>
+            </div>
+            <h1 class="title">${item.category.name}</h1>
+        `
+        
         html += /*html */ `
             <div class="echo-hero-baner">
             <div class="echo-inner-img-ct-1  img-transition-scale">
@@ -48,5 +54,6 @@ API.get("categories_news/1/articles?limit=10&page=2").then((res) => {
     });
 
     elArticlesWithCategory.innerHTML = html;
+    elCategoryName.innerHTML = htmlCategory;
 
 })

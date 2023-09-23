@@ -11,7 +11,7 @@ API.get(`categories_news`).then((res) => {
       if (index < 3) {
         html+= /*html */`
         <li class="menu-item">
-        <a href="#" class="echo-dropdown-main-element active"
+        <a href="category.html?id=${item.id}" class="echo-dropdown-main-element active"
           >${item.name}</a
         >
         </li>
@@ -19,7 +19,7 @@ API.get(`categories_news`).then((res) => {
       }else{
         htmlOther += /*html */ `
         <li class="nav-item">
-        <a href="category-style-1.html">${item.name}</a>
+        <a href="category.html?id=${item.id}">${item.name}</a>
         </li>
         `
       }
