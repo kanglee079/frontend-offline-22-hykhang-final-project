@@ -6,6 +6,7 @@ if (isNaN(currentPage)) currentPage = 1;
 
 const elArticlesWithCategory =document.getElementById("articlesWithCategory");
 const elCategoryName = document.getElementById("categoryName");
+const elShowMore = document.getElementById("showMore");
 
 API.get(`categories_news/${id}/articles?limit=10&page=2`).then((res) => {
     const articlesByCategory = res.data.data;
