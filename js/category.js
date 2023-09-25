@@ -58,3 +58,4 @@ API.get(`categories_news/${id}/articles?limit=10&page=2`).then((res) => {
     elCategoryName.innerHTML = htmlCategory;
 
 })
+
