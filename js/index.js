@@ -314,12 +314,10 @@ API.get("categories_news/articles?limit_cate=3&limit=3").then((res) => {
                     <h5 class="text-capitalize">${category}</h5>
                     <hr />
                     ${htmlArticles}
-                    <div class="echo-de-category-show-more-btn">
-                        <a
-                        href="post-details.html"
-                        class="text-capitalize echo-py-btn"
-                        >Show more</a
-                        >
+                    <div class="echo-de-category-show-more-btn-edit">
+                        <p class="text-capitalize echo-py-btn">
+                          <a href="category.html">Show More</a>
+                        </p>
                     </div>
                 </div>
             </div>
