@@ -16,12 +16,12 @@ API.get('articles?limit=5&page=1').then((res) =>{
         const title = item.title;
         const description = item.description;
         const publish_date = dayjs(item.publish_date).fromNow();
-
+        console.log(item.id);
 
         if (index === 0) {
             htmlBanner += /*html */`
             <div class="echo-hero-banner-main-img img-transition-scale">
-            <a href="post-details.html"
+            <a href="post-details.html?id=${item.id}"
               ><img
                 class="banner-image-one img-hover"
                 src="${thumb}"
@@ -29,7 +29,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             /></a>
           </div>
           <h1 class="echo-hero-title text-capitalize font-weight-bold">
-            <a href="post-details.html" class="title-hover"
+            <a href="post-details.html?id=${item.id}" class="title-hover"
               >${title}</a
             >
           </h1>
@@ -64,7 +64,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             htmlTopStory += /*html */ `
             <div class="echo-top-story first">
                     <div class="echo-story-picture img-transition-scale">
-                      <a href="post-details.html"
+                      <a href="post-details.html?id=${item.id}"
                         ><img
                             src="${thumb}"
                             alt="${title}"
@@ -73,7 +73,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
                     </div>
                     <div class="echo-story-text">
                       <h4>
-                        <a href="#" class="title-hover"
+                        <a href="post-details.html?id=${item.id}" class="title-hover"
                           >${title}</a
                         >
                       </h4>
@@ -92,7 +92,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             htmlTopic += /*html */ `
             <div class="echo-top-story">
             <div class="echo-story-picture img-transition-scale">
-              <a href="post-details.html"
+              <a href="post-details.html?id=${item.id}"
                 ><img
                     src="${thumb}"
                     alt="${title}"
@@ -101,7 +101,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             </div>
             <div class="echo-story-text">
               <h4>
-                <a href="#" class="title-hover"
+                <a href="post-details.html?id=${item.id}" class="title-hover"
                   >${title}</a
                 >
               </h4>
@@ -131,7 +131,7 @@ API.get("articles/3312/related?limit=10").then((res) =>{
         <div class="swiper-slide">
         <div class="echo-latest-news-main-content">
           <div class="echo-latest-news-img img-transition-scale">
-            <a href="post-details.html">
+            <a href="post-details.html?id=${item.id}">
               <img
                 src="${thumb}"
                 alt="${title}"
@@ -142,7 +142,7 @@ API.get("articles/3312/related?limit=10").then((res) =>{
           <div class="echo-latest-news-single-title">
             <h5>
               <a
-                href="post-details.html"
+                href="post-details.html?id=${item.id}"
                 class="text-capitalize title-hover"
                 >${title}</a
               >
@@ -180,7 +180,7 @@ API.get("articles/popular?limit=7").then((res) =>{
                 <div
                 class="echo-trending-left-site-post-img img-transition-scale"
                 >
-                <a href="post-details.html">
+                <a href="post-details.html?id=${item.id}">
                     <img
                         src="${thumb}"
                         alt="${title}"
@@ -191,7 +191,7 @@ API.get("articles/popular?limit=7").then((res) =>{
                 <div class="echo-trending-right-site-post-title">
                 <h5>
                     <a
-                    href="post-details.html"
+                    href="post-details.html?id=${item.id}"
                     class="text-capitalize title-hover"
                     >${title}</a
                     >
@@ -213,7 +213,7 @@ API.get("articles/popular?limit=7").then((res) =>{
         <div
           class="echo-trending-right-site-post-img img-transition-scale"
         >
-          <a href="post-details.html">
+          <a href="post-details.html?id=${item.id}">
             <img
                 src="${thumb}"
                 alt="${title}"
@@ -223,7 +223,7 @@ API.get("articles/popular?limit=7").then((res) =>{
         </div>
         <div class="echo-trending-right-site-post-title">
           <h4 class="text-capitalize">
-            <a href="post-details.html" class="title-hover"
+            <a href="post-details.html?id=${item.id}" class="title-hover"
               >${title}</a
             >
           </h4>
@@ -284,7 +284,7 @@ API.get("categories_news/articles?limit_cate=3&limit=3").then((res) => {
             <div
               class="echo-de-category-content-img img-transition-scale"
             >
-              <a href="post-details.html">
+              <a href="post-details.html?id=${article.id}">
                 <img
                   src="${articleThumb}"
                   alt="${articleTitle}"
@@ -294,7 +294,7 @@ API.get("categories_news/articles?limit_cate=3&limit=3").then((res) => {
             </div>
             <div class="echo-de-category-content-title">
               <h6>
-                <a href="post-details.html" class="title-hover"
+                <a href="post-details.html?id=${article.id}" class="title-hover"
                   >${articleTitle}</a
                 >
               </h6>

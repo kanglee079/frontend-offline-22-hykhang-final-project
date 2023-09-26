@@ -3,7 +3,6 @@ const elMainMenu = document.getElementById("mainMenu");
 API.get(`categories_news`).then((res) => {
     const categories = res.data.data;
   
-      console.log(categories);
     let html = "";
     let htmlOther = "";
     categories.forEach((item, index) => {
@@ -37,4 +36,5 @@ API.get(`categories_news`).then((res) => {
     `
   });
   
+
 

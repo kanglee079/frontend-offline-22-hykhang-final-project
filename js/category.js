@@ -38,10 +38,10 @@ function renderCategoryPage() {
             html += /*html */ `
                 <div class="echo-hero-baner">
                 <div class="echo-inner-img-ct-1  img-transition-scale">
-                    <a href="post-details.html"><img src="${thumb}" class="echo-ct-style-1-banner-images" alt="${title}"></a>
+                    <a href="post-details.html?id=${item.id}"><img src="${thumb}" class="echo-ct-style-1-banner-images" alt="${title}"></a>
                 </div>
                 <div class="echo-hero-baner-text-heading-info-ct-1">
-                    <h2 class="echo-hero-title text-capitalize font-weight-bold"><a href="post-details.html" class="title-hover">${title}</a></h2>
+                    <h2 class="echo-hero-title text-capitalize font-weight-bold"><a href="post-details.html?id=${item.id}" class="title-hover">${title}</a></h2>
                     <div class="echo-hero-area-titlepost-post-like-comment-share">
                         <div class="echo-hero-area-like-read-comment-share">
                             <a href="#"><i class="fa-light fa-clock"></i> ${publish_date}</a>
@@ -100,7 +100,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
         html += /*html */ `
         <div class="echo-top-story">
             <div class="echo-story-picture img-transition-scale">
-            <a href="post-details.html"
+            <a href="post-details.html?id=${item.id}"
                 ><img
                     src="${thumb}"
                     alt="${title}"
@@ -109,7 +109,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             </div>
             <div class="echo-story-text">
             <h4>
-                <a href="#" class="title-hover"
+                <a href="post-details.html?id=${item.id}" class="title-hover"
                 >${title}</a
                 >
             </h4>
