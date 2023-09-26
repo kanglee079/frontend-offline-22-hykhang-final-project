@@ -18430,10 +18430,12 @@ html[data-theme=dark] .echo-popup-model .echo-popup-transition a:hover {
 .echo-de-category-area .echo-de-category-content .echo-de-category-content-img-title .echo-de-category-read a i {
   margin-right: 4px;
 }
-.echo-de-category-area .echo-de-category-content .echo-de-category-show-more-btn {
+.echo-de-category-show-more-btn-edit {
   margin-top: 30px;
+  cursor: pointer;
+  width: 200px;
 }
-.echo-de-category-area .echo-de-category-content .echo-de-category-show-more-btn a {
+.echo-de-category-show-more-btn-edit p {
   padding: 8px 0;
   display: block;
   text-align: center;
@@ -18441,8 +18443,8 @@ html[data-theme=dark] .echo-popup-model .echo-popup-transition a:hover {
   opacity: 0.8;
   font-family: "Bona Nova", serif;
 }
-.echo-de-category-area .echo-de-category-content .echo-de-category-show-more-btn a::after {
-  content: "\f061";
+.echo-de-category-show-more-btn-edit p::after {
+  content: "\f107";
   font-family: "Font Awesome 6 Pro" !important;
   margin-left: 10px;
 }
