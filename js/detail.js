@@ -100,8 +100,8 @@ API.get(`articles/popular?limit=2`).then((res) => {
             <div class="col-lg-6">
                 <div class="echo-top-story">
                     <div class="echo-story-text">
-                        <h6><a href="#" class="title-hover">${item.title}</a></h6>
-                        <a href="#" class="pe-none"><i class="fa-light fa-clock"></i> 06 minute read</a>
+                        <h6><a href="post-details.html?id=${item.id}" class="title-hover">${item.title}</a></h6>
+                        <a href="#" class="pe-none"><i class="fa-light fa-clock"></i> ${item.publish_date}</a>
                     </div>
                 </div>
             </div>
