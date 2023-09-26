@@ -11,6 +11,10 @@ const elShowMore = document.getElementById("showMore");
 const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
 
+elListCategoryPop.innerHTML = "<div class='loading'>Loading...</div>";
+elTopStory.innerHTML = "<div class='loading'>Loading...</div>";
+
+
 elShowMore.addEventListener("click", function(){
     currentPage++;
     renderCategoryPage(); 

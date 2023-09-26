@@ -5,6 +5,13 @@ const elPostTrendingLeft = document.getElementById("postTrendingLeft");
 const elPostTrendingRight = document.getElementById("postTrendingRight");
 const elDicoverCategories = document.getElementById("dicoverCategories");
 
+elHeroBanner.innerHTML = "<div class='loading'>Loading...</div>";
+elTopStory.innerHTML = "<div class='loading'>Loading...</div>";
+elMySwiperWrapper.innerHTML = "<div class='loading'>Loading...</div>";
+elPostTrendingLeft.innerHTML = "<div class='loading'>Loading...</div>";
+elPostTrendingRight.innerHTML = "<div class='loading'>Loading...</div>";
+elDicoverCategories.innerHTML = "<div class='loading'>Loading...</div>";
+
 API.get('articles?limit=5&page=1').then((res) =>{
     const articles = res.data.data;
 

@@ -13,6 +13,17 @@ const elTopStory = document.getElementById("topStory");
 const elMaybeYouWant = document.getElementById("maybeYouWant");
 const elRouteDetail = document.getElementById("routeDetail");
 
+elTitleDetail.innerHTML = "<div class='loading'>Loading...</div>";
+elimageDetail.innerHTML = "<div class='loading'>Loading...</div>";
+elDescDetail.innerHTML = "<div class='loading'>Loading...</div>";
+elPublishDate.innerHTML = "<div class='loading'>Loading...</div>";
+elContentDetail.innerHTML = "<div class='loading'>Loading...</div>";
+elAuthorName.innerHTML = "<div class='loading'>Loading...</div>";
+elListCategoryPop.innerHTML = "<div class='loading'>Loading...</div>";
+elTopStory.innerHTML = "<div class='loading'>Loading...</div>";
+elMaybeYouWant.innerHTML = "<div class='loading'>Loading...</div>";
+elRouteDetail.innerHTML = "<div class='loading'>Loading...</div>";
+
 
 API.get(`articles/${id}`).then((res) =>{
     const detail = res.data.data;
