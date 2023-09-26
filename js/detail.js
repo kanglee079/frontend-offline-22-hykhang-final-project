@@ -11,6 +11,7 @@ const elAuthorName = document.getElementById("authorName");
 const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
 const elMaybeYouWant = document.getElementById("maybeYouWant");
+const elRouteDetail = document.getElementById("routeDetail");
 
 
 API.get(`articles/${id}`).then((res) =>{
@@ -22,6 +23,12 @@ API.get(`articles/${id}`).then((res) =>{
     elPublishDate.innerText = detail.publish_date;
     elContentDetail.innerHTML = detail.content;
     elAuthorName.innerText = detail.author;
+    elRouteDetail.innerHTML = /*html*/ `
+        <a href="#" class="prev">ECHO /</a>
+        <a href="category.html?id=${detail.category.id}" class="prev">${detail.category.name} /</a>
+        <a href="#" class="next">Bài viết</a>
+    `
+    
 })
 
 API.get(`categories_news`).then((res) => {
