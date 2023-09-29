@@ -10,9 +10,7 @@ const elCategoryName = document.getElementById("categoryName");
 const elShowMore = document.getElementById("showMore");
 const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
-
-elListCategoryPop.innerHTML = "<div class='loading'>Loading...</div>";
-elTopStory.innerHTML = "<div class='loading'>Loading...</div>";
+const elLoadingPage = document.getElementById("loadingPage");
 
 
 elShowMore.addEventListener("click", function(){
@@ -131,5 +129,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
             ${html}
         </div>
     `;
+
+    elLoadingPage.remove();
 })
 

@@ -1,6 +1,5 @@
 const elMainMenu = document.getElementById("mainMenu");
 
-elMainMenu.innerHTML = "<div class='loading'>Loading...</div>";
 
 API.get(`categories_news`).then((res) => {
     const categories = res.data.data;

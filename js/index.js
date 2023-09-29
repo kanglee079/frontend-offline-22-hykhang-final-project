@@ -4,13 +4,7 @@ const elMySwiperWrapper = document.getElementById("mySwiperWrapper");
 const elPostTrendingLeft = document.getElementById("postTrendingLeft");
 const elPostTrendingRight = document.getElementById("postTrendingRight");
 const elDicoverCategories = document.getElementById("dicoverCategories");
-
-elHeroBanner.innerHTML = "<div class='loading'>Loading...</div>";
-elTopStory.innerHTML = "<div class='loading'>Loading...</div>";
-elMySwiperWrapper.innerHTML = "<div class='loading'>Loading...</div>";
-elPostTrendingLeft.innerHTML = "<div class='loading'>Loading...</div>";
-elPostTrendingRight.innerHTML = "<div class='loading'>Loading...</div>";
-elDicoverCategories.innerHTML = "<div class='loading'>Loading...</div>";
+const elLoadingPage = document.getElementById("loadingPage");
 
 API.get('articles?limit=5&page=1').then((res) =>{
     const articles = res.data.data;
@@ -123,6 +117,7 @@ API.get('articles?limit=5&page=1').then((res) =>{
 
     elHeroBanner.innerHTML = htmlBanner;
     elTopStory.innerHTML = htmlTopStory + htmlTopic;
+    elLoadingPage.remove();
 })
 
 API.get("articles/3312/related?limit=10").then((res) =>{
@@ -333,3 +328,4 @@ API.get("categories_news/articles?limit_cate=3&limit=3").then((res) => {
 
     elDicoverCategories.innerHTML = htmlAllCategories;
 });
+
