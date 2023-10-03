@@ -36,7 +36,10 @@ elMyPagination.addEventListener("click", function(e){
 function renderPagination(total) {
     let html = '<li class="page-item"><a class="page-link">Previous</a></li>';
 
-    for (let index = 1; index <= total; index++) {
+    let startPage = Math.max(1, currentPage - 5);
+    let endPage = Math.min(total, currentPage + 5);
+
+    for (let index = startPage; index <= endPage; index++) {
         if (index === currentPage) {
             html += `<li class="page-item active"><a class="page-link" href="#">${index}</a></li>`;
         } else {
@@ -46,14 +49,12 @@ function renderPagination(total) {
 
     html += '<li class="page-item"><a class="page-link">Next</a></li>';
 
-    elMyPagination.innerHTML = html;  // Gán html cho elMyPagination
+    elMyPagination.innerHTML = html;  
 
-    // Disable "Previous" button if on first page
     if (currentPage === 1) {
         elMyPagination.querySelector('li:first-child').classList.add('disabled');
     }
 
-    // Disable "Next" button if on last page
     if (currentPage === total) {
         elMyPagination.querySelector('li:last-child').classList.add('disabled');
     }
