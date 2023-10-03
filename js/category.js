@@ -3,27 +3,70 @@ const urlParams = new URLSearchParams(queryString);
 const id = parseInt(urlParams.get("id"));
 let currentPage = parseInt(urlParams.get("page"));
 if (isNaN(currentPage)) currentPage = 1;
-renderCategoryPage();
+renderCategoryPage(currentPage);
 
 const elArticlesWithCategory =document.getElementById("articlesWithCategory");
 const elCategoryName = document.getElementById("categoryName");
-const elShowMore = document.getElementById("showMore");
 const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
+const elMyPagination = document.getElementById("myPagination");
 const elLoadingPage = document.getElementById("loadingPage");
+const elTitleSite = document.getElementById("titleSite");
+let ogTitle = document.querySelector('meta[property="og:title"]');
 
+// elShowMore.addEventListener("click", function(){
+//     currentPage++;
+//     renderCategoryPage(); 
+// })
 
-elShowMore.addEventListener("click", function(){
-    currentPage++;
-    renderCategoryPage(); 
+elMyPagination.addEventListener("click", function(e){
+    const el = e.target;
+    if (el.classList.contains('page-link')) {
+        if (el.innerText === "Previous" && currentPage > 1) {
+            currentPage--;
+        } else if (el.innerText === "Next" && currentPage < elMyPagination.children.length - 2) { // subtracting 2 for Previous and Next buttons
+            currentPage++;
+        } else {
+            currentPage = parseInt(el.innerText);
+        }
+        renderCategoryPage(currentPage);
+    }
 })
 
-function renderCategoryPage() {
-    API.get(`categories_news/${id}/articles?limit=5&page=${currentPage}`).then((res) => {
+function renderPagination(total) {
+    let html = '<li class="page-item"><a class="page-link">Previous</a></li>';
+
+    for (let index = 1; index <= total; index++) {
+        if (index === currentPage) {
+            html += `<li class="page-item active"><a class="page-link" href="#">${index}</a></li>`;
+        } else {
+            html += `<li class="page-item"><a class="page-link" href="#">${index}</a></li>`;
+        }
+    }
+
+    html += '<li class="page-item"><a class="page-link">Next</a></li>';
+
+    elMyPagination.innerHTML = html;  // Gán html cho elMyPagination
+
+    // Disable "Previous" button if on first page
+    if (currentPage === 1) {
+        elMyPagination.querySelector('li:first-child').classList.add('disabled');
+    }
+
+    // Disable "Next" button if on last page
+    if (currentPage === total) {
+        elMyPagination.querySelector('li:last-child').classList.add('disabled');
+    }
+}
+
+function renderCategoryPage(page = 1) {
+    API.get(`categories_news/${id}/articles?limit=5&page=${page}`).then((res) => {
         const articlesByCategory = res.data.data;
-    
+        const totalPages = res.data.meta.last_page;
+
         let html = "";
         let htmlCategory ="";
+        let titleSite ="";
         articlesByCategory.forEach(item => {
             const title = item.title;
             const thumb = item.thumb;
@@ -31,8 +74,7 @@ function renderCategoryPage() {
             const publish_date = dayjs(item.publish_date).fromNow();
             htmlCategory =/*html */ `
                 <div class="meta">
-                <a href="#" class="prev">ECHO /</a>
-                <a href="#" class="next">Danh Mục</a>
+                <a href="#" class="prev">ECHO</a>
                 </div>
                 <h1 class="title">${item.category.name}</h1>
             `
@@ -63,11 +105,14 @@ function renderCategoryPage() {
                 </div>
                 </div>
             `
+            titleSite = "Echo News - " + item.category.name;
+
         });
-    
-        elArticlesWithCategory.innerHTML += /*html */`${html}`;
+
+        elTitleSite.innerText = titleSite;
+        elArticlesWithCategory.innerHTML = /*html */`${html}`;
         elCategoryName.innerHTML = htmlCategory;
-    
+        renderPagination(totalPages);
     })
 }
 
@@ -85,6 +130,7 @@ API.get(`categories_news`).then((res) => {
                 </a>
             </li>
         `;
+        
     }
   
     elListCategoryPop.innerHTML = html;

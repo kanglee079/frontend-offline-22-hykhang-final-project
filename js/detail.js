@@ -13,12 +13,17 @@ const elTopStory = document.getElementById("topStory");
 const elMaybeYouWant = document.getElementById("maybeYouWant");
 const elRouteDetail = document.getElementById("routeDetail");
 const elLoadingPage = document.getElementById("loadingPage");
+const elTitleSite = document.getElementById("titleSite");
+let ogTitle = document.querySelector('meta[property="og:title"]');
 
 
 
 API.get(`articles/${id}`).then((res) =>{
     const detail = res.data.data;
 
+    ogTitle.content = detail.title;
+    elTitleSite.innerText = detail.title;
+    
     elTitleDetail.innerText = detail.title;
     elimageDetail.src = detail.thumb;
     elDescDetail.innerText = detail.description;
@@ -27,10 +32,37 @@ API.get(`articles/${id}`).then((res) =>{
     elAuthorName.innerText = detail.author;
     elRouteDetail.innerHTML = /*html*/ `
         <a href="#" class="prev">ECHO /</a>
-        <a href="category.html?id=${detail.category.id}" class="prev">${detail.category.name} /</a>
-        <a href="#" class="next">Bài viết</a>
+        <a href="category.html?id=${detail.category.id}" class="prev">${detail.category.name}</a>
     `
     
+    API.get(`categories_news/${detail.category.id}/articles`).then((res) => {
+        const articles = res.data.data;
+
+        // Chọn 2 bài viết ngẫu nhiên
+        const selectedArticles = [];
+        while (selectedArticles.length < 2) {
+            const randomArticle = articles[Math.floor(Math.random() * articles.length)];
+            if (!selectedArticles.includes(randomArticle)) {
+                selectedArticles.push(randomArticle);
+            }
+        }
+      
+        let html = "";
+        selectedArticles.forEach((item) => {
+            html += /*html*/ `
+                <div class="col-lg-6">
+                    <div class="echo-top-story">
+                        <div class="echo-story-text">
+                            <h6><a href="post-details.html?id=${item.id}" class="title-hover">${item.title}</a></h6>
+                            <a href="#" class="pe-none"><i class="fa-light fa-clock"></i> ${item.publish_date}</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        elMaybeYouWant.innerHTML = html;
+    })
+
     elLoadingPage.remove();
 })
 
@@ -94,21 +126,3 @@ API.get('articles?limit=5&page=1').then((res) =>{
     `;
 })
 
-API.get(`articles/popular?limit=2`).then((res) => {
-    const articles = res.data.data;
-  
-    let html = "";
-    articles.forEach((item) => {
-        html += /*html*/ `
-            <div class="col-lg-6">
-                <div class="echo-top-story">
-                    <div class="echo-story-text">
-                        <h6><a href="post-details.html?id=${item.id}" class="title-hover">${item.title}</a></h6>
-                        <a href="#" class="pe-none"><i class="fa-light fa-clock"></i> ${item.publish_date}</a>
-                    </div>
-                </div>
-            </div>
-        `;
-  });
-  elMaybeYouWant.innerHTML = html;
-})
