@@ -33,3 +33,8 @@
       z-index: 9999;
 }
 
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: white; 
+}
+
