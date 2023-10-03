@@ -40,10 +40,9 @@ class Header extends HTMLElement {
                     <div class="echo-header-top-subs-social">
                       <div class="echo-header-top-subscribe-btn">
                         <a
-                          href="#"
+                          href="login.html"
                           class="echo-py-btn"
-                          onclick="document.getElementById('id01').style.display='inline'"
-                          ><i class="fa-regular fa-envelope"></i> Subscribe</a
+                          ><i class="fa-solid fa-right-to-bracket"></i> Login/Sign up</a
                         >
                       </div>
                       <div class="echo-header-top-social-media">
