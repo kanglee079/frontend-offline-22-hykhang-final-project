@@ -18,16 +18,25 @@ elAuthForm.addEventListener("submit", function(e){
     const data = {name, email, password, phone, address};
 
     API.post('/users/register', data)
-      .then(function (response) {
-        console.log(response);
+      .then(function (responseRegister) {
+        API.post('/auth/login', {email, password}).then(function (responseLogin) {
+        window.location.href = "index.html";
+      });
     })
-      .catch(function (error) {
-        console.log(error);
-        // elFormMessage.innerHTML = `<div class="alert alert-danger" role="alert">
-        // Bạn đã nhập sai thông tin, vui lòng nhập lại !
-        // </div>
-        // `
-        // elEmail.value ="";
-        // elPassword.value ="";
+      .catch(function (err) {
+        const errors = err.response.data.errors;
+        console.log('errors', errors);
+
+        let errString = "";
+
+        for (const property in object) {
+            errString += /*html*/ `<li>${errors[property]}</li>`
+        }
+
+        elFormMessage.innerHTML = `<div class="alert alert-danger role="alert"> 
+            <ul>${errString}</ul>
+        </div>`;
+        elEmail.value ="";
+        elPassword.value ="";
       });
 })
