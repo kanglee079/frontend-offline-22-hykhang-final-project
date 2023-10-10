@@ -1,6 +1,6 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const id = parseInt(urlParams.get("id"));
+const keyword = urlParams.get("keyword");
 let currentPage = parseInt(urlParams.get("page"));
 if (isNaN(currentPage)) currentPage = 1;
 renderCategoryPage(currentPage);
@@ -10,12 +10,6 @@ const elCategoryName = document.getElementById("categoryName");
 const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
 const elMyPagination = document.getElementById("myPagination");
-
-
-// elShowMore.addEventListener("click", function(){
-//     currentPage++;
-//     renderCategoryPage(); 
-// })
 
 elMyPagination.addEventListener("click", function(e){
     const el = e.target;
@@ -59,24 +53,19 @@ function renderPagination(total) {
 }
 
 function renderCategoryPage(page = 1) {
-    API.get(`categories_news/${id}/articles?limit=5&page=${page}`).then((res) => {
+    API.get(`articles/search?q=${keyword}&limit=5&page=${page}`).then((res) => {
         const articlesByCategory = res.data.data;
         const totalPages = res.data.meta.last_page;
+        const total = res.data.meta.total;
 
         let html = "";
-        let htmlCategory ="";
         let titleSite ="";
         articlesByCategory.forEach(item => {
-            const title = item.title;
+            const regex = new RegExp(keyword, 'gi');
+            const title = item.title.replace(regex, (match) => `<mark>${match}</mark>`);
             const thumb = item.thumb;
-            const description = item.description;
+            const description = item.description.replace(regex, (match) => `<mark>${match}</mark>`);
             const publish_date = dayjs(item.publish_date).fromNow();
-            htmlCategory =/*html */ `
-                <div class="meta">
-                <a href="#" class="prev">ECHO</a>
-                </div>
-                <h1 class="title">${item.category.name}</h1>
-            `
             
             html += /*html */ `
                 <div class="echo-hero-baner">
@@ -110,7 +99,7 @@ function renderCategoryPage(page = 1) {
 
         elTitleSite.innerText = titleSite;
         elArticlesWithCategory.innerHTML = /*html */`${html}`;
-        elCategoryName.innerHTML = htmlCategory;
+        elCategoryName.innerHTML = `Tìm thấy ${total} bài viết với từ khoá "${keyword}"`;
         renderPagination(totalPages);
     })
 }

@@ -4,7 +4,6 @@ const elMySwiperWrapper = document.getElementById("mySwiperWrapper");
 const elPostTrendingLeft = document.getElementById("postTrendingLeft");
 const elPostTrendingRight = document.getElementById("postTrendingRight");
 const elDicoverCategories = document.getElementById("dicoverCategories");
-const elLoadingPage = document.getElementById("loadingPage");
 
 API.get('articles?limit=5&page=1').then((res) =>{
     const articles = res.data.data;

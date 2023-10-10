@@ -12,10 +12,6 @@ const elListCategoryPop = document.getElementById("listCategoryPop");
 const elTopStory = document.getElementById("topStory");
 const elMaybeYouWant = document.getElementById("maybeYouWant");
 const elRouteDetail = document.getElementById("routeDetail");
-const elLoadingPage = document.getElementById("loadingPage");
-const elTitleSite = document.getElementById("titleSite");
-let ogTitle = document.querySelector('meta[property="og:title"]');
-
 
 
 API.get(`articles/${id}`).then((res) =>{
