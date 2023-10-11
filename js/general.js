@@ -6,7 +6,8 @@ const API = axios.create({
   dayjs.locale('vi')
 
 
-
+const ACCESS_TOKEN = 'ACCESS_TOKEN';
+const token = localStorage.getItem(ACCESS_TOKEN);
 const elTitleSite = document.getElementById("titleSite");
 let ogTitle = document.querySelector('meta[property="og:title"]');
 const elLoadingPage = document.getElementById("loadingPage");

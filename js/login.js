@@ -1,3 +1,11 @@
+API.get('/auth/me', {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+}).then((res) => {
+  window.location.href = 'index.html';
+})
+
 const elAuthForm = document.getElementById("auth-form");
 const elEmail = document.getElementById("email");
 const elPassword = document.getElementById("password");
@@ -6,13 +14,17 @@ const elFormMessage = document.getElementById("formMessage");
 elAuthForm.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const email = elEmail.value.trim();
-    const password = elPassword.value.trim();
+    const formData = new FormData(elAuthForm);
+    const data = Object.fromEntries(formData);
 
-    const data = {email, password};
+    // const email = elEmail.value.trim();
+    // const password = elPassword.value.trim();
+
+    // const data = {email, password};
 
     API.post('/auth/login', data)
       .then(function (response) {
+        localStorage.setItem(ACCESS_TOKEN, response.data.access_token);
         window.location.href = "index.html";
       })
       .catch(function (error) {

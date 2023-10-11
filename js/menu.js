@@ -35,7 +35,50 @@ API.get(`categories_news`).then((res) => {
         </ul>
       </li>
     `
+
+
+      API.get('/auth/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((resMe) => {
+        const name = resMe.data.data.name;
+        elMainMenu.innerHTML += /*html */ `
+          <li class="menu-item echo-has-dropdown">
+            <a href="#" class="echo-dropdown-main-element">
+              <span>${name}</span>
+            </a>
+            <ul class="echo-submenu list-unstyled menu-pages">
+              <li><a href="profile.html">Thông tin tài khoản</a></li>
+              <li><a href="change-password.html">Thay đổi mật khẩu</a></li>
+              <li><a href="#" id="btnLogout">Đăng xuất</a></li>
+            </ul>
+          </li>
+        `;
+      }).catch((err) => {
+        elMainMenu.innerHTML += /*html*/ `
+        <li class="menu-item echo-has-dropdown">
+          <a href="#" class="echo-dropdown-main-element">
+            <span>Tài Khoản</span>
+          </a>
+          <ul class="echo-submenu list-unstyled menu-pages">
+            <li><a href="login.html">Đăng nhập</a></li>
+            <li><a href="register.html">Đăng kí</a></li>
+          </ul>
+        </li>
+        `
+      })
   });
   
+elMainMenu.addEventListener("click", function(e){
+
+  const el = e.target;
+
+  if (el.id === 'btnLogout') {
+    e.preventDefault();
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.href = 'index.html';
+  }
+})
 
 

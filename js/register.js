@@ -1,3 +1,11 @@
+API.get('/auth/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    window.location.href = 'index.html';
+  })
+
 const elAuthForm = document.getElementById("auth-form");
 const elEmail = document.getElementById("email");
 const elName = document.getElementById("name");
@@ -9,17 +17,13 @@ const elFormMessage = document.getElementById("formMessage");
 elAuthForm.addEventListener("submit", function(e){
     e.preventDefault();
 
-    const name = elName.value.trim();
-    const email = elEmail.value.trim();
-    const password = elPassword.value.trim();
-    const phone = elPhone.value.trim();
-    const address = elAddress.value.trim();
-
-    const data = {name, email, password, phone, address};
+    const formData = new FormData(elAuthForm);
+    const data = Object.fromEntries(formData);
 
     API.post('/users/register', data)
       .then(function (responseRegister) {
-        API.post('/auth/login', {email, password}).then(function (responseLogin) {
+        const dataLogin = {email: data.email, password: data.password}
+        API.post('/auth/login', dataLogin).then(function (responseLogin) {
         window.location.href = "index.html";
       });
     })
@@ -29,11 +33,11 @@ elAuthForm.addEventListener("submit", function(e){
 
         let errString = "";
 
-        for (const property in object) {
+        for (const property in errors) {
             errString += /*html*/ `<li>${errors[property]}</li>`
         }
 
-        elFormMessage.innerHTML = `<div class="alert alert-danger role="alert"> 
+        elFormMessage.innerHTML = `<div class="alert alert-danger" role="alert"> 
             <ul>${errString}</ul>
         </div>`;
         elEmail.value ="";
