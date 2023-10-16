@@ -1,3 +1,13 @@
+API.get('/auth/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(res => {
+
+  }).catch(err => {
+    window.location.href = "index.html";
+  })
+
 const elChangePassword = document.getElementById("changePasswordForm");
 
 elChangePassword.addEventListener("submit", function(e) {
